@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nova Servicios - Design System Colors -->
+    <color name="nova_primary">#3A7BD5</color>
+    <color name="nova_primary_light">#A6C8FF</color>
+    <color name="nova_accent">#4CD4B0</color>
+
+    <color name="nova_background">#F5F7FA</color>
+
+    <color name="nova_text_primary">#2E2E2E</color>
+    <color name="nova_text_secondary">#6E6E6E</color>
+
+    <color name="nova_error">#D9534F</color>
+
+    <!-- Usuales -->
+    <color name="white">#FFFFFF</color>
+
+</resources>
+
+

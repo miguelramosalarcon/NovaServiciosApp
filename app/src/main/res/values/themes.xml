@@ -1,8 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.NovaServiciosApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Colores principales -->
+        <item name="colorPrimary">@color/nova_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/nova_accent</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Fondo general -->
+        <item name="android:windowBackground">@color/nova_background</item>
     </style>
 
     <style name="Theme.NovaServiciosApp" parent="Base.Theme.NovaServiciosApp" />

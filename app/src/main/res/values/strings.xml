@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">NovaServiciosApp</string>
+
+    <string name="dashboard_title">Bienvenido a Nova Servicios</string>
+    <string name="dashboard_subtitle">Soluciones técnicas a domicilio</string>
+
+    <string name="card_servicios">Servicios</string>
+    <string name="card_registrar">Registrar</string>
+    <string name="card_online">Online</string>
+    <string name="card_contacto">Contacto</string>
+
+    <string name="toast_servicios">Abrir: Servicios (próximo HT03)</string>
+    <string name="toast_registrar">Abrir: Registrar servicio (HT03)</string>
+    <string name="toast_online">Abrir: Online (HT04)</string>
+    <string name="toast_contacto">Abrir: Contacto (próximo)</string>
 </resources>

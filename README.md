@@ -2,7 +2,7 @@
 
 Aplicación móvil desarrollada en **Java** con **Android Studio**, como proyecto académico del curso:
 
-## PDSD-641 – Desarrollo de Aplicaciones Móviles
+## PDSD-641-647 – Desarrollo de Aplicaciones Móviles
 
 Este proyecto simula el desarrollo de una app corporativa para la empresa ficticia **Servicios Integrales Nova**, dedicada a brindar soluciones técnicas a domicilio (plomería, electricidad y mantenimiento).
 

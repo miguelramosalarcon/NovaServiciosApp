@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NovaServiciosApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.ServiceListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.AddServiceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

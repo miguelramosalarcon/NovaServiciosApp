@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import android.content.ContentValues;
+import com.example.novaserviciosapp.model.Servicio;
+
 /**
  * NovaDbHelper
  * Clase encargada de gestionar la base de datos local SQLite.
@@ -82,4 +85,40 @@ public class NovaDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SERVICIOS);
         onCreate(db);
     }
+
+    //Inserta servicios en la base de datos
+    public long insertarServicio(Servicio servicio) {
+
+        // Obtiene la base de datos en modo escritura
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Crea un objeto ContentValues para almacenar los valores
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_NOMBRE, servicio.getNombre());
+        values.put(COLUMN_TIPO, servicio.getTipo());
+        values.put(COLUMN_FECHA, servicio.getFecha());
+        values.put(COLUMN_HORA, servicio.getHora());
+        values.put(COLUMN_COSTO, servicio.getCosto());
+        values.put(COLUMN_ACTIVO, servicio.getActivo());
+
+        // Inserta los valores en la tabla y obtiene el id generado
+        long id = db.insert(TABLE_SERVICIOS, null, values);
+
+        // Cierra la conexión
+        db.close();
+
+        return id;
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

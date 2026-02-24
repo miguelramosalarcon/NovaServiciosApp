@@ -1,26 +1,35 @@
 package com.example.novaserviciosapp.ui;
 
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 import com.example.novaserviciosapp.R;
+import com.google.android.material.appbar.MaterialToolbar;
 
+/**
+ * AddServiceActivity
+ * Pantalla encargada de registrar un nuevo servicio.
+ * En esta fase solo muestra la interfaz y permite volver al Dashboard.
+ */
 public class AddServiceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_service);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        toolbar.setNavigationOnClickListener(v -> finish());
+    }
+
+    /**
+     * Maneja el clic en la flecha de regreso (Up button).
+     * Finaliza la Activity y vuelve al Dashboard.
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

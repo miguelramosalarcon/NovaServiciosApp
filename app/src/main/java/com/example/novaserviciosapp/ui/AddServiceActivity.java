@@ -3,6 +3,8 @@ package com.example.novaserviciosapp.ui;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.novaserviciosapp.R;
+import com.example.novaserviciosapp.data.local.NovaDbHelper;
+import com.example.novaserviciosapp.model.Servicio;
 import com.google.android.material.appbar.MaterialToolbar;
 
 //Librerias para DatePicker y TimePicker
@@ -33,10 +35,15 @@ public class AddServiceActivity extends AppCompatActivity {
     private EditText etCosto;
     private Button btnGuardar;
 
+    private NovaDbHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_service);
+
+        dbHelper = new NovaDbHelper(this);
+
 
         etFecha = findViewById(R.id.etFecha);
         etFecha.setOnClickListener(v -> showDatePicker());
@@ -50,10 +57,41 @@ public class AddServiceActivity extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnGuardar);
 
         btnGuardar.setOnClickListener(v -> {
-            if (validarFormulario()) {
-                Toast.makeText(this, "Formulario válido", Toast.LENGTH_SHORT).show();
+
+            if (!validarFormulario()) return;
+
+            // Obtener datos del formulario
+            String nombre = etNombre.getText().toString().trim().toUpperCase(Locale.getDefault());
+            String tipo = etTipo.getText().toString().trim().toUpperCase(Locale.getDefault());
+            String fecha = etFecha.getText().toString().trim();
+            String hora = etHora.getText().toString().trim();
+            double costo = Double.parseDouble(etCosto.getText().toString().trim());
+
+            // ==============================
+            // Crear objeto Servicio (POJO)
+            // usando setters (más compatible)
+            // ==============================
+            Servicio servicio = new Servicio();
+            servicio.setNombre(nombre);
+            servicio.setTipo(tipo);
+            servicio.setFecha(fecha);
+            servicio.setHora(hora);
+            servicio.setCosto(costo);
+            servicio.setActivo(1); // activo por defecto
+
+            // Insertar en base de datos
+            long resultado = dbHelper.insertarServicio(servicio);
+
+            if (resultado != -1) {
+                Toast.makeText(this, "Servicio guardado correctamente", Toast.LENGTH_SHORT).show();
+                limpiarFormulario();
+            } else {
+                Toast.makeText(this, "Error al guardar servicio", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -143,8 +181,8 @@ public class AddServiceActivity extends AppCompatActivity {
      */
     private boolean validarFormulario() {
 
-        String nombre = etNombre.getText().toString().trim();
-        String tipo = etTipo.getText().toString().trim();
+        String nombre = etNombre.getText().toString().trim().toUpperCase(Locale.getDefault());
+        String tipo = etTipo.getText().toString().trim().toUpperCase(Locale.getDefault());
         String fecha = etFecha.getText().toString().trim();
         String hora = etHora.getText().toString().trim();
         String costoStr = etCosto.getText().toString().trim();
@@ -198,6 +236,18 @@ public class AddServiceActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    /**
+     * Limpia todos los campos del formulario
+     * después de un registro exitoso.
+     */
+    private void limpiarFormulario() {
+        etNombre.setText("");
+        etTipo.setText("");
+        etFecha.setText("");
+        etHora.setText("");
+        etCosto.setText("");
     }
 
 

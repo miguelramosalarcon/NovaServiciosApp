@@ -32,7 +32,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Nombre del servicio"
                 android:minHeight="48dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:inputType="textCapCharacters"/>
 
             <!-- Tipo -->
             <EditText
@@ -41,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:hint="Tipo de servicio"
                 android:minHeight="48dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp"
+                android:inputType="textCapCharacters"/>
 
             <!-- Fecha -->
             <EditText

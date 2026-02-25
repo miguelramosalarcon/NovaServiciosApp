@@ -11,6 +11,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import android.widget.EditText;
 import android.app.TimePickerDialog;
+import android.widget.Button;
+import android.widget.Toast;
 
 /**
  * AddServiceActivity
@@ -26,6 +28,11 @@ public class AddServiceActivity extends AppCompatActivity {
     private EditText etFecha;
     private EditText etHora;
 
+    private EditText etNombre;
+    private EditText etTipo;
+    private EditText etCosto;
+    private Button btnGuardar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,17 @@ public class AddServiceActivity extends AppCompatActivity {
 
         etHora = findViewById(R.id.etHora);
         etHora.setOnClickListener(v -> showTimePicker());
+
+        etNombre = findViewById(R.id.etNombre);
+        etTipo = findViewById(R.id.etTipo);
+        etCosto = findViewById(R.id.etCosto);
+        btnGuardar = findViewById(R.id.btnGuardar);
+
+        btnGuardar.setOnClickListener(v -> {
+            if (validarFormulario()) {
+                Toast.makeText(this, "Formulario válido", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -117,6 +135,70 @@ public class AddServiceActivity extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    /**
+     * Valida que todos los campos del formulario
+     * contengan información válida antes de guardar.
+     *
+     * @return true si el formulario es válido, false en caso contrario.
+     */
+    private boolean validarFormulario() {
+
+        String nombre = etNombre.getText().toString().trim();
+        String tipo = etTipo.getText().toString().trim();
+        String fecha = etFecha.getText().toString().trim();
+        String hora = etHora.getText().toString().trim();
+        String costoStr = etCosto.getText().toString().trim();
+
+        // Validación nombre
+        if (nombre.isEmpty()) {
+            etNombre.setError("Ingrese el nombre del servicio");
+            etNombre.requestFocus();
+            return false;
+        }
+
+        // Validación tipo
+        if (tipo.isEmpty()) {
+            etTipo.setError("Ingrese el tipo de servicio");
+            etTipo.requestFocus();
+            return false;
+        }
+
+        // Validación fecha
+        if (fecha.isEmpty()) {
+            etFecha.setError("Seleccione una fecha");
+            etFecha.requestFocus();
+            return false;
+        }
+
+        // Validación hora
+        if (hora.isEmpty()) {
+            etHora.setError("Seleccione una hora");
+            etHora.requestFocus();
+            return false;
+        }
+
+        // Validación costo
+        if (costoStr.isEmpty()) {
+            etCosto.setError("Ingrese el costo");
+            etCosto.requestFocus();
+            return false;
+        }
+
+        try {
+            double costo = Double.parseDouble(costoStr);
+            if (costo < 0) {
+                etCosto.setError("El costo no puede ser negativo");
+                etCosto.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            etCosto.setError("Costo inválido");
+            etCosto.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
 
 
 }

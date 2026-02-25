@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.ContentValues;
 import com.example.novaserviciosapp.model.Servicio;
 
+import android.database.Cursor;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * NovaDbHelper
  * Clase encargada de gestionar la base de datos local SQLite.
@@ -112,6 +116,75 @@ public class NovaDbHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Obtiene todos los servicios activos (activo = 1)
+     * ordenados de forma descendente por ID.
+     *
+     * Equivalente SQL:
+     * SELECT * FROM servicios
+     * WHERE activo = 1
+     * ORDER BY id DESC;
+     *
+     * @return Lista de servicios activos
+     */
+    public List<Servicio> obtenerServiciosActivos() {
+
+        // Lista que almacenará los resultados
+        List<Servicio> listaServicios = new ArrayList<>();
+
+        // Abrimos la base de datos en modo lectura
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Parámetros de consulta
+        String selection = COLUMN_ACTIVO + " = ?";
+        String[] selectionArgs = {"1"};
+
+        String orderBy = COLUMN_ID + " DESC";
+
+        // Ejecutamos la consulta usando query()
+        Cursor cursor = db.query(
+                TABLE_SERVICIOS,   // Tabla
+                null,              // null = todas las columnas
+                selection,         // WHERE
+                selectionArgs,     // Argumentos del WHERE
+                null,              // GROUP BY
+                null,              // HAVING
+                orderBy            // ORDER BY
+        );
+
+        // Verificamos si el cursor tiene datos
+        if (cursor != null && cursor.moveToFirst()) {
+
+            do {
+
+                // Crear objeto Servicio
+                Servicio servicio = new Servicio();
+
+                // Mapear columnas del cursor al objeto
+                servicio.setId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)));
+                servicio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE)));
+                servicio.setTipo(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO)));
+                servicio.setFecha(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA)));
+                servicio.setHora(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORA)));
+                servicio.setCosto(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_COSTO)));
+                servicio.setActivo(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ACTIVO)));
+
+                // Agregar a la lista
+                listaServicios.add(servicio);
+
+            } while (cursor.moveToNext());
+        }
+
+        // Cerramos cursor
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        // Cerramos base de datos
+        db.close();
+
+        return listaServicios;
+    }
 
 
 

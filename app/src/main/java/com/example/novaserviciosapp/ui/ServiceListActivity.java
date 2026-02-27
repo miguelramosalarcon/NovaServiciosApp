@@ -12,7 +12,8 @@ import com.example.novaserviciosapp.model.Servicio;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.List;
-
+import android.view.View;
+import android.widget.TextView;
 /**
  * ServiceListActivity
  * Muestra el listado de servicios activos usando RecyclerView.
@@ -22,10 +23,14 @@ public class ServiceListActivity extends AppCompatActivity {
     private RecyclerView recyclerServicios;
     private NovaDbHelper dbHelper;
 
+    private TextView tvEmptyState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_list);
+
+        tvEmptyState = findViewById(R.id.tvEmptyState);
 
         // Toolbar
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
@@ -57,8 +62,20 @@ public class ServiceListActivity extends AppCompatActivity {
      * Lee servicios activos desde SQLite y los muestra en el RecyclerView.
      */
     private void cargarServicios() {
+
         List<Servicio> lista = dbHelper.obtenerServiciosActivos();
-        ServicioAdapter adapter = new ServicioAdapter(lista);
-        recyclerServicios.setAdapter(adapter);
+
+        if (lista.isEmpty()) {
+            // Mostrar mensaje vacío
+            tvEmptyState.setVisibility(View.VISIBLE);
+            recyclerServicios.setVisibility(View.GONE);
+        } else {
+            // Mostrar lista
+            tvEmptyState.setVisibility(View.GONE);
+            recyclerServicios.setVisibility(View.VISIBLE);
+
+            ServicioAdapter adapter = new ServicioAdapter(lista);
+            recyclerServicios.setAdapter(adapter);
+        }
     }
 }

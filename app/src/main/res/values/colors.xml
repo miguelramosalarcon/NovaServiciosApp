@@ -4,6 +4,8 @@
     <color name="nova_primary">#3A7BD5</color>
     <color name="nova_primary_light">#A6C8FF</color>
     <color name="nova_accent">#4CD4B0</color>
+    <color name="nova_success">#1E9E7A</color>
+    <color name="nova_success_dark">#1B7F63</color>
 
     <color name="nova_background">#F5F7FA</color>
 

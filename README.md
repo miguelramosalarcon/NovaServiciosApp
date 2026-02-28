@@ -161,5 +161,5 @@ Este proyecto busca desarrollar en el estudiante:
 # 👨‍💻 Autor
 
 Miguel Ramos Alarcón  
-SENATI | Docente de Desarrollo Web
+SENATI | Docente de Desarrollo Software
 ---

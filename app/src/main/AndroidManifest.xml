@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NovaServiciosApp">
         <activity
+            android:name=".ui.EditServiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ServiceListActivity"
             android:exported="false" />
         <activity

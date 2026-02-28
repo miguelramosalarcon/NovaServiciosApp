@@ -187,8 +187,66 @@ public class NovaDbHelper extends SQLiteOpenHelper {
     }
 
 
+    public Servicio obtenerServicioPorId(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                TABLE_SERVICIOS,
+                null,
+                COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null
+        );
+
+        Servicio servicio = null;
+
+        if (cursor != null && cursor.moveToFirst()) {
+
+            servicio = new Servicio();
+            servicio.setId(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID)));
+            servicio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE)));
+            servicio.setTipo(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIPO)));
+            servicio.setFecha(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FECHA)));
+            servicio.setHora(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HORA)));
+            servicio.setCosto(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_COSTO)));
+            servicio.setActivo(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ACTIVO)));
+
+            cursor.close();
+        }
+
+        db.close();
+
+        return servicio;
+    }
 
 
+    public int actualizarServicio(Servicio servicio) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(COLUMN_NOMBRE, servicio.getNombre());
+        values.put(COLUMN_TIPO, servicio.getTipo());
+        values.put(COLUMN_FECHA, servicio.getFecha());
+        values.put(COLUMN_HORA, servicio.getHora());
+        values.put(COLUMN_COSTO, servicio.getCosto());
+
+        // WHERE id = ?
+        int filasAfectadas = db.update(
+                TABLE_SERVICIOS,
+                values,
+                COLUMN_ID + "=?",
+                new String[]{String.valueOf(servicio.getId())}
+        );
+
+        db.close();
+
+        return filasAfectadas;
+    }
 
 
 

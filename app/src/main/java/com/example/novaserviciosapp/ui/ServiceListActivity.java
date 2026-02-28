@@ -14,6 +14,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import java.util.List;
 import android.view.View;
 import android.widget.TextView;
+import android.content.Intent;
 /**
  * ServiceListActivity
  * Muestra el listado de servicios activos usando RecyclerView.
@@ -74,7 +75,13 @@ public class ServiceListActivity extends AppCompatActivity {
             tvEmptyState.setVisibility(View.GONE);
             recyclerServicios.setVisibility(View.VISIBLE);
 
-            ServicioAdapter adapter = new ServicioAdapter(lista);
+            ServicioAdapter adapter = new ServicioAdapter(lista, servicio -> {
+
+                Intent intent = new Intent(ServiceListActivity.this, EditServiceActivity.class);
+                intent.putExtra("service_id", servicio.getId());
+                startActivity(intent);
+
+            });
             recyclerServicios.setAdapter(adapter);
         }
     }

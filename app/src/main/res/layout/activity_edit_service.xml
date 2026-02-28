@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/nova_background"
+    android:padding="@dimen/space_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:title="Editar Servicio"
+            android:background="@color/nova_primary"
+            android:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_arrow_back_24"/>
+
+        <!-- Indicador visual -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo Edición"
+            android:textColor="@color/nova_primary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/space_16"/>
+
+        <!-- Nombre -->
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre del servicio"/>
+
+        <!-- Tipo -->
+        <EditText
+            android:id="@+id/etTipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tipo"
+            android:layout_marginTop="@dimen/space_16"/>
+
+        <!-- Fecha -->
+        <EditText
+            android:id="@+id/etFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha"
+            android:layout_marginTop="@dimen/space_16"/>
+
+        <!-- Hora -->
+        <EditText
+            android:id="@+id/etHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Hora"
+            android:layout_marginTop="@dimen/space_16"/>
+
+        <!-- Costo -->
+        <EditText
+            android:id="@+id/etCosto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Costo"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="@dimen/space_16"/>
+
+        <!-- Botón Actualizar -->
+        <Button
+            android:id="@+id/btnActualizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actualizar Servicio"
+            android:layout_marginTop="@dimen/space_24"/>
+
+    </LinearLayout>
+
+</ScrollView>

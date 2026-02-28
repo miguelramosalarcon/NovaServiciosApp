@@ -11,31 +11,37 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.novaserviciosapp.R;
 import com.example.novaserviciosapp.model.Servicio;
 
-import java.util.List;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * ServicioAdapter
  * Adapter oficial del RecyclerView.
- * Su función es convertir una lista de Servicio (datos)
- * en tarjetas visuales (item_servicio.xml).
  */
 public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.ServicioViewHolder> {
 
     private final List<Servicio> listaServicios;
+    private final OnItemLongClickListener listener;
 
-    public ServicioAdapter(List<Servicio> listaServicios) {
+    /**
+     * Interfaz para manejar Long Press desde la Activity
+     */
+    public interface OnItemLongClickListener {
+        void onItemLongClick(Servicio servicio);
+    }
+
+    public ServicioAdapter(List<Servicio> listaServicios, OnItemLongClickListener listener) {
         this.listaServicios = listaServicios;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ServicioViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Infla (convierte) el XML item_servicio.xml en una vista real
+
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_servicio, parent, false);
 
@@ -44,23 +50,18 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.Servic
 
     @Override
     public void onBindViewHolder(@NonNull ServicioViewHolder holder, int position) {
-        // Obtiene el servicio actual
+
         Servicio servicio = listaServicios.get(position);
 
-        // Pinta los datos en la tarjeta
         holder.tvNombre.setText(servicio.getNombre());
-        holder.tvTipo.setText("Tipo: " + servicio.getTipo());
+        holder.tvTipo.setText(servicio.getTipo());
 
         try {
 
-            // Formato original ISO
             SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
-            // Formato visual amigable
             SimpleDateFormat formatoVisual = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
 
             Date fechaDate = formatoOriginal.parse(servicio.getFecha());
-
             String fechaFormateada = formatoVisual.format(fechaDate);
 
             holder.tvFechaHora.setText(fechaFormateada + " • " + servicio.getHora());
@@ -69,9 +70,21 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.Servic
             holder.tvFechaHora.setText(servicio.getFecha() + " • " + servicio.getHora());
         }
 
-
-        //holder.tvFechaHora.setText("Fecha/Hora: " + servicio.getFecha() + " " + servicio.getHora());
         holder.tvCosto.setText("S/ " + String.format("%.2f", servicio.getCosto()));
+
+        // 🔥 LONG PRESS
+        holder.itemView.setOnLongClickListener(v -> {
+            listener.onItemLongClick(servicio);
+            return true;
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+
+            android.util.Log.d("DEBUG", "ID enviado: " + servicio.getId());
+
+            listener.onItemLongClick(servicio);
+            return true;
+        });
     }
 
     @Override
@@ -79,11 +92,6 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.Servic
         return listaServicios.size();
     }
 
-    /**
-     * ViewHolder
-     * Mantiene referencias a los TextViews del item,
-     * para no buscarlos repetidamente (mejor rendimiento).
-     */
     static class ServicioViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNombre, tvTipo, tvFechaHora, tvCosto;

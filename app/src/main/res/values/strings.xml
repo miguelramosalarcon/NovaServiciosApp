@@ -6,7 +6,7 @@
 
     <string name="card_servicios">Servicios</string>
     <string name="card_registrar">Registrar</string>
-    <string name="card_online">Online</string>
+    <string name="card_online">Servicio Online</string>
     <string name="card_contacto">Contacto</string>
 
     <string name="toast_servicios">Abrir: Servicios (próximo HT03)</string>

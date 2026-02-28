@@ -1,5 +1,6 @@
 package com.example.novaserviciosapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.novaserviciosapp.R;
@@ -34,6 +35,7 @@ public class AddServiceActivity extends AppCompatActivity {
     private EditText etTipo;
     private EditText etCosto;
     private Button btnGuardar;
+    private Button btnVerServicios;
 
     private NovaDbHelper dbHelper;
 
@@ -91,7 +93,8 @@ public class AddServiceActivity extends AppCompatActivity {
         });
 
 
-
+        btnVerServicios = findViewById(R.id.btnVerServicios);
+        configurarBotonVerServicios();
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -99,6 +102,15 @@ public class AddServiceActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
 
+    }
+
+    private void configurarBotonVerServicios() {
+        btnVerServicios.setOnClickListener(v -> {
+
+            Intent intent = new Intent(AddServiceActivity.this, ServiceListActivity.class);
+            startActivity(intent);
+
+        });
     }
 
     /**
@@ -249,6 +261,8 @@ public class AddServiceActivity extends AppCompatActivity {
         etHora.setText("");
         etCosto.setText("");
     }
+
+
 
 
 }

@@ -84,6 +84,15 @@
                 android:layout_height="wrap_content"
                 android:text="Guardar Servicio"/>
 
+            <!-- Botón ver servicios -->
+            <Button
+                android:id="@+id/btnVerServicios"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Servicios"
+                android:backgroundTint="@color/nova_success_dark"
+                android:layout_marginTop="12dp"/>
+
         </LinearLayout>
 
     </ScrollView>

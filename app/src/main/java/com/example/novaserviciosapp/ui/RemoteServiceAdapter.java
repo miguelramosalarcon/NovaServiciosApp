@@ -36,7 +36,7 @@ public class RemoteServiceAdapter extends RecyclerView.Adapter<RemoteServiceAdap
 
         RemoteService service = serviceList.get(position);
 
-        holder.tvTitle.setText(service.getTitle());
+        holder.tvTitle.setText(service.getTitle().toUpperCase());
         holder.tvBody.setText(service.getBody());
     }
 

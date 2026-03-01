@@ -14,6 +14,7 @@ import com.example.novaserviciosapp.R;
 import com.example.novaserviciosapp.model.RemoteService;
 import com.example.novaserviciosapp.network.ApiService;
 import com.example.novaserviciosapp.network.RetrofitClient;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,11 @@ public class RemoteServiceListActivity extends AppCompatActivity {
         rvRemoteServices.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RemoteServiceAdapter(remoteServices);
         rvRemoteServices.setAdapter(adapter);
+
+        //Toolbar
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> finish());
 
         // Cargar datos remotos
         cargarServiciosOnline();

@@ -60,10 +60,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Simulación de funcionalidad online (temporal)
-        cardOnline.setOnClickListener(v ->
-                Toast.makeText(this, "Funcionalidad online próximamente", Toast.LENGTH_SHORT).show()
-        );
+        // Conectar card con servicio online
+        cardOnline.setOnClickListener(v -> {
+
+            Intent intent = new Intent(MainActivity.this, RemoteServiceListActivity.class);
+            startActivity(intent);
+
+        });
 
         // Abre el marcador telefónico usando Intent implícito
         cardContacto.setOnClickListener(v -> {

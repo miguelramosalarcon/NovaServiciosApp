@@ -12,7 +12,7 @@
         android:layout_height="?attr/actionBarSize"
         android:title="Registrar Servicio"
         app:navigationIcon="@drawable/ic_arrow_back_24"
-        app:titleCentered="true" />
+        app:titleCentered="true"/>
 
     <!-- Contenido del formulario -->
     <ScrollView

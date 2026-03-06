@@ -15,6 +15,9 @@ import java.util.List;
 import android.view.View;
 import android.widget.TextView;
 import android.content.Intent;
+
+
+
 /**
  * ServiceListActivity
  * Muestra el listado de servicios activos usando RecyclerView.

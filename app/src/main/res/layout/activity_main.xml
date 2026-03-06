@@ -87,7 +87,8 @@
                 app:cardCornerRadius="@dimen/card_radius"
                 app:cardElevation="@dimen/card_elevation"
                 app:cardUseCompatPadding="true"
-                app:strokeWidth="0dp">
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@color/nova_primary_light">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -125,14 +126,16 @@
                 android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="@dimen/card_radius"
                 app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/nova_accent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/space_16"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    >
 
                     <ImageView
                         android:layout_width="@dimen/icon_size"
@@ -163,7 +166,8 @@
                 android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="@dimen/card_radius"
                 app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/nova_success">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -201,7 +205,9 @@
                 android:foreground="?attr/selectableItemBackground"
                 app:cardCornerRadius="@dimen/card_radius"
                 app:cardElevation="@dimen/card_elevation"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                app:cardBackgroundColor="@color/nova_primary"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"

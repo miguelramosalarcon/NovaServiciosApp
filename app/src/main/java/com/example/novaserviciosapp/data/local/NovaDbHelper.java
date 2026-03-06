@@ -249,7 +249,20 @@ public class NovaDbHelper extends SQLiteOpenHelper {
     }
 
 
+    public int eliminarServicio(int id) {
 
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int filas = db.delete(
+                "servicios",
+                "id=?",
+                new String[]{String.valueOf(id)}
+        );
+
+        db.close();
+
+        return filas;
+    }
 
 
 }

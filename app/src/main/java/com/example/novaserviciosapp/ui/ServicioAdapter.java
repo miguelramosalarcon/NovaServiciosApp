@@ -74,11 +74,6 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.Servic
 
         // 🔥 LONG PRESS
         holder.itemView.setOnLongClickListener(v -> {
-            listener.onItemLongClick(servicio);
-            return true;
-        });
-
-        holder.itemView.setOnLongClickListener(v -> {
 
             android.util.Log.d("DEBUG", "ID enviado: " + servicio.getId());
 
@@ -104,5 +99,12 @@ public class ServicioAdapter extends RecyclerView.Adapter<ServicioAdapter.Servic
             tvFechaHora = itemView.findViewById(R.id.tvFechaHora);
             tvCosto = itemView.findViewById(R.id.tvCosto);
         }
+    }
+
+    public void eliminarItem(int position) {
+
+        listaServicios.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, listaServicios.size());
     }
 }
